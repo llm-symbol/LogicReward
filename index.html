@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="LogicReward: step-level, symbolically guided rewards for unstructured natural language reasoning using theorem proving and soft unification.">
+  <meta name="keywords" content="LogicReward, theorem prover, Isabelle/HOL, step-level reward, faithful reasoning, autoformalization, soft unification, SFT, DPO, logical reasoning, NLI">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LogicReward: Faithful & Rigorous Reasoning</title>
+
+  <!-- Fonts & CSS (same look-and-feel as Nerfies) -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <!-- JS (same as Nerfies) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- Minimal navbar keeping Nerfies styling -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#top">
+        <span class="icon"><i class="fas fa-home"></i></span>
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link">Other Works in Neuro-Symbolic</a>
+  <div class="navbar-dropdown">
+    <a class="navbar-item" href="https://llm-symbol.github.io/SymbCoT/">
+  <span><b>SymbCoT</b> (ACL 2024)</span>
+</a>
+
+
+
+
+    <a class="navbar-item" href="https://llm-symbol.github.io/Aristotle/">
+      <span><b>Aristotle</b> (ACL 2025 Oral)</span>
+    </a>
+    <a class="navbar-item" href="https://llm-symbol.github.io/MuSLR/">
+        <span><b>MuSLR</b> (NeurIPS 2025)</span>
+      
+    </a>
+    <a class="navbar-item" href="https://llm-symbol.github.io/">
+      <b>Neuro-Symbolic LM</b>
+    </a>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Training LLMs with LogicReward for Faithful and Rigorous Reasoning</h1>
+
+          <!-- Authors -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b>Jundong Xu</b><sup>1</sup>,</span>
+            <span class="author-block"><b>Hao Fei</b><sup>1</sup><sup>*</sup>,</span>
+            <span class="author-block"><b>Huichi Zhou</b><sup>2</sup>,</span>
+            <span class="author-block"><b>Xin Quan</b><sup>3</sup>,</span>
+            <span class="author-block"><b>Qijun Huang</b><sup>4</sup>,</span>
+            <span class="author-block"><b>Shengqiong Wu</b><sup>1</sup>,</span>
+            <span class="author-block"><b>William Yang Wang</b><sup>5</sup>,</span>
+            <span class="author-block"><b>Mong-Li Lee</b><sup>1</sup>,</span>
+            <span class="author-block"><b>Wynne Hsu</b><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>National University of Singapore,</span>
+            <span class="author-block"><sup>2</sup>University College London,</span>
+            <span class="author-block"><sup>3</sup>University of Manchester,</span>
+            <span class="author-block"><sup>4</sup>University of Melbourne,</span>
+            <span class="author-block"><sup>5</sup>University of California, Santa Barbara</span>
+          </div>
+          <div class="is-size-5 has-text-weight-bold" style="margin-top: 0.25rem;">(Preprint)</div>
+
+          <!-- Buttons (same style as Nerfies) -->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://llm-symbol.github.io/" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-globe"></i></span><span>Neuro-Symbolic Project Page</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <!-- TODO: replace with real arXiv link -->
+                <a href="https://arxiv.org/abs/TODO" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <!-- TODO: replace with code repo if available -->
+                <a href="https://github.com/llm-symbol/LogicReward" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <!-- TODO: replace with dataset link if available -->
+                <a href="https://huggingface.co/datasets/TODO" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-folder-open"></i></span><span>Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-quote-right"></i></span><span>BibTeX</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== TLDR -->
+<section class="section" id="tldr">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">TL;DR</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>LogicReward is a reward function that evaluates unstructured natural language reasoning and provides
+            step-level, symbolically guided rewards</b>.
+          </p>
+                  <div class="content has-text-centered" style="margin-top: 1.25rem;">
+          <img src="./static/images/intro.png"
+               alt="Introduction figure placeholder"
+               style="width:100%; max-width:1000px; border-radius:8px;">
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Introduction (use abstract) -->
+<section class="section" id="intro">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Although LLMs exhibit strong reasoning capabilities, existing training methods
+largely depend on outcome-based feedback, which can produce correct answers
+with flawed reasoning. Prior work introduces supervision on intermediate steps
+but still lacks guarantees of logical soundness, which is crucial in high-stakes
+scenarios where logical consistency is paramount. To address this, we propose
+LogicReward, a novel reward system that guides model training by enforcing
+step-level logical correctness with a theorem prover. We further introduce <b>Auto-formalization with Soft Unification</b>, which reduces natural language ambiguity
+and improves formalization quality, enabling more effective use of the theorem
+prover. An 8B model trained on data constructed with LogicReward surpasses
+GPT-4o and o4-mini by 11.6% and 2% on natural language inference and logi-
+cal reasoning tasks with simple training procedures. Further analysis shows that
+LogicReward enhances reasoning faithfulness, improves generalizability to un-
+seen tasks such as math and commonsense reasoning, and provides a reliable re-
+ward signal even without ground-truth labels.
+          </p>
+        </div>
+
+        <!-- Intro image placeholder -->
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Methodology -->
+<section class="section" id="methodology">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Methodology</h2>
+
+        <div class="content has-text-justified">
+          <ul>
+            <li>
+              <b>LogicReward Design (Premise Validity &amp; Logic Validity)</b><br>
+              <i>Motivation:</i> Correct answers can come from incorrect reasoning, so rewards must evaluate the reasoning itself.<br>
+              <i>Implementation:</i> LogicReward scores each step using <b>premise validity</b> (grounding in the given context) and
+              <b>logic validity</b> (theorem-prover verification that the inference is logically entailed).
+            </li>
+            <li>
+              <b>Soft Unification</b><br>
+              <i>Motivation:</i> Natural language reasoning often omits implicit assumptions, making direct symbolic checking fragile.<br>
+              <i>Implementation:</i> Soft Unification adds missing but necessary assumptions to reduce ambiguity before formal verification.
+            </li>
+            <li>
+              <b>Refinement Loop</b><br>
+              <i>Motivation:</i> One-shot formalization can fail due to ambiguity or incomplete structure.<br>
+              <i>Implementation:</i> The system iteratively refines the formalized representation until it becomes verifiable or is rejected,
+              enabling reliable step-level evaluation for unstructured reasoning.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Methodology image placeholder -->
+        <div class="content has-text-centered" style="margin-top: 1.25rem;">
+          <img src="./static/images/method.png"
+               alt="LogicReward method overview placeholder"
+               style="width:100%; max-width:1000px; border-radius:8px;">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Performance -->
+<section class="section" id="performance">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">📈 Performance</h2>
+
+        <div class="content has-text-justified">
+          <ul>
+            <li>🚀 <b>Consistent gains across benchmarks</b>:
+              <ul>
+                <li>
+                  LogicReward improves <b>LLaMA-3.1-8B by +11%</b> and <b>Qwen-3-8B by +3.2%</b> on average across
+                  <b>8 logical reasoning and natural language inference benchmarks</b>.
+                </li>
+                <li>
+                  Using an 8B model, we outperform strong baselines such as <b>GPT-4o</b> and <b>o4-mini</b> by
+                  <b>+11.6%</b> and <b>+2%</b>.
+                </li>
+              </ul>
+            </li>
+
+            <li>🏆 <b>Outperforms existing reward signals</b>:
+              LogicReward demonstrates stronger performance than alternative reward functions, including
+              <b>confidence-based rewards</b>, <b>LLM-as-a-Judge</b>, and <b>Process Reward Models (PRMs)</b>.
+            </li>
+
+            <li>🌍 <b>Stronger out-of-distribution generalization</b>:
+              Models trained with LogicReward generalize better to OOD tasks such as:
+              <ul>
+                <li><b>Commonsense reasoning</b> (CommonsenseQA)</li>
+                <li><b>Mathematical reasoning</b> (GSM8K)</li>
+                <li><b>Deductive reasoning</b> (BoardGameQA)</li>
+              </ul>
+            </li>
+
+            <li>🧠 <b>Faithful reasoning beyond accuracy</b>:
+              LogicReward improves not only final-task accuracy, but also the <b>faithfulness</b>,
+              <b>logical consistency</b>, and <b>rigor</b> of intermediate reasoning steps.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Performance image placeholders (3) -->
+        <div class="content has-text-centered" style="margin-top: 1.25rem;">
+          <img src="./static/images/exp1.png"
+               alt="Performance figure 1 placeholder"
+               style="width:100%; max-width:1000px; border-radius:8px;">
+
+        </div>
+
+        <div class="content has-text-centered" style="margin-top: 1.25rem;">
+          <img src="./static/images/exp2.png"
+               alt="Performance figure 2 placeholder"
+               style="width:100%; max-width:1000px; border-radius:8px;">
+
+        </div>
+
+        <div class="content has-text-centered" style="margin-top: 1.25rem;">
+          <img src="./static/images/exp3.png"
+               alt="Performance figure 3 placeholder"
+               style="width:100%; max-width:1000px; border-radius:8px;">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BibTeX (placeholder) -->
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+
+    <!-- BibTeX placeholder -->
+    <pre><code>@article{logicreward2025,
+  title   = {Training LLMs with LogicReward for Faithful and Rigorous Reasoning},
+  author  = {Jundong Xu, Hao Fei, Huichi Zhou, Xin Quan, Qijun Huang, Shengqiong Wu, William Yang Wang, Mong-Li Lee, Wynne Hsu},
+  journal = {arXiv preprint arXiv:TODO},
+  year    = {2025}
+}</code></pre>
+
+    <p class="has-text-grey is-size-6">
+      Placeholder: replace with the official BibTeX from arXiv / venue.
+    </p>
+  </div>
+</section>
+
+<!-- Footer (keeps Nerfies CC notice) -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <!-- If you add your PDF later, update the link below -->
+      <a class="icon-link" href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/llm-symbol/LogicReward" class="external-link">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>.
+          </p>
+          <p>
+            Template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            Please remember to remove the analytics code from the header (already removed here).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
